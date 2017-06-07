@@ -7,5 +7,5 @@ import model.SavingAccount;
 public interface AccountDao {
 
     List<SavingAccount> getAll();
-    SavingAccount find();
+    SavingAccount find(Integer id);
 }
