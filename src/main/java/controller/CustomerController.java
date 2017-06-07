@@ -1,12 +1,24 @@
 package controller;
 
+import DAO.CustomerDaoImpl;
 import exceptions.WrongPasswordException;
+import model.Customer;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
 
 
 public class CustomerController {
+
+    private Connection connection;
+    private CustomerDaoImpl customerDaoImpl;
+
+    public CustomerController(Connection connection) {
+        this.connection = connection;
+        this.customerDaoImpl = new CustomerDaoImpl(connection);
+    }
+
 
     public String HashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
@@ -20,9 +32,9 @@ public class CustomerController {
     }
 
     public Customer validatePassword(String login, String password) throws NoSuchAlgorithmException {
-        Customer customer = new CustomerDaoImpl.findByLogin(login);
+        Customer customer = customerDaoImpl.findByLogin(login);
         String hashedPass = HashPassword(password);
-        if (hashedPass == customer.password.toString()) {
+        if (hashedPass == customer.getPassword()) {
             return customer;
         } else {
             throw new WrongPasswordException();

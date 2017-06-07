@@ -24,4 +24,8 @@ public class Customer {
         this.isActive = isActive;
         this.lastLogin = lastLogin;
     }
+
+    public String getPassword() {
+        return password;
+    }
 }
