@@ -78,8 +78,7 @@ public class AccountDaoImpl implements AccountDao {
             BigInteger balance = BigInteger.valueOf(rs.getInt("Balance"));
             BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
             Integer interest = rs.getInt("Interest");
-            savingAccount = new SavingAccount(accountID, customer, number, accountType,
-                accountStatus, openDate, balance, debitLine, interest);
+            savingAccount = new SavingAccount(accountID, customer, number, accountType, accountStatus, openDate, balance, debitLine, interest);
             rs.close();
             stmt.close();
         } catch (Exception e) {

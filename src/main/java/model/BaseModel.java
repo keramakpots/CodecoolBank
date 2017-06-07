@@ -1,6 +1,6 @@
 package model;
 
-public class BaseModel {
+public class BaseModel implements BaseModelInterface{
 
     private Integer id;
     private String name;
