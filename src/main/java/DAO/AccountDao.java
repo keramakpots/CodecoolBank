@@ -1,11 +1,11 @@
 package DAO;
 
 import java.util.List;
-import model.SavingAccount;
+import model.Account;
 
 public interface AccountDao {
 
-    List<SavingAccount> getAll();
+    List<Account> getAll();
 
-    SavingAccount find(Integer id);
+    Account find(Integer id);
 }
