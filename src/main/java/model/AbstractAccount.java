@@ -1,6 +1,8 @@
 package model;
 
+
 public abstract class AbstractAccount implements Account {
+
     public void deposit(double amount) {
 
     }
