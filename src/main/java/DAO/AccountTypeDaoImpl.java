@@ -21,7 +21,7 @@ public class AccountTypeDaoImpl {
         AccountType accountType = null;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM AccountsTypes WHERE AccountTypeID = '"+id+"';");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM AccountTypes WHERE AccountTypeID = '"+id+"';");
             String name = rs.getString("Name");
             String description = rs.getString("Description");
             accountType = new AccountType(id, name, description);
