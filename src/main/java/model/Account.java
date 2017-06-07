@@ -6,6 +6,8 @@ public interface Account {
 
     public void withdraw(double amount);
 
-    public double getBalance(); public int getAccountId();
+    public double getBalance();
+
+    public int getAccountId();
 
 }

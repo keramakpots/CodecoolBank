@@ -1,12 +1,10 @@
 package DAO;
 
-import java.math.BigInteger;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import model.AccountType;
-import model.SavingAccount;
+
 
 public class AccountTypeDaoImpl {
 
@@ -21,7 +19,8 @@ public class AccountTypeDaoImpl {
         AccountType accountType = null;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM AccountTypes WHERE AccountTypeID = '"+id+"';");
+            ResultSet rs = stmt
+                .executeQuery("SELECT * FROM AccountTypes WHERE AccountTypeID = '" + id + "';");
             String name = rs.getString("Name");
             String description = rs.getString("Description");
             accountType = new AccountType(id, name, description);

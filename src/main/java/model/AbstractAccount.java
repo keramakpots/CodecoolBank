@@ -18,4 +18,4 @@ public abstract class AbstractAccount implements Account {
     public int getAccountId() {
         return 0;
     }
-    }
+}
