@@ -43,7 +43,7 @@ CREATE TABLE "Transactions" (
 	`DateOfTransaction`	TEXT NOT NULL,
 	`TransactionTypeID`	INTEGER NOT NULL,
 	`Value`	INTEGER NOT NULL,
-	`Description`	INTEGER NOT NULL,
+	`Description`	TEXT NOT NULL,
 	`TransactionStatusID`	INTEGER NOT NULL,
 	`SourceAcountID`	INTEGER NOT NULL,
 	`SourceCardID`	INTEGER,
