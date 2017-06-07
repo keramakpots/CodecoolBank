@@ -10,9 +10,6 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Created by oskar on 07.06.17.
- */
 class CustomerControllerTest {
 
     private CustomerController customerController;
