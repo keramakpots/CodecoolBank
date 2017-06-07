@@ -6,6 +6,7 @@ import java.sql.Statement;
 import model.AccountStatus;
 
 public class AccountStatusDaoImpl {
+
     private Connection connection;
 
     public AccountStatusDaoImpl(Connection connection) {
@@ -17,7 +18,8 @@ public class AccountStatusDaoImpl {
         AccountStatus accountStatus = null;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM AccountStatuses WHERE AccountStatusID = '"+id+"';");
+            ResultSet rs = stmt.executeQuery(
+                "SELECT * FROM AccountStatuses WHERE AccountStatusID = '" + id + "';");
             String name = rs.getString("Name");
             String description = rs.getString("Description");
             accountStatus = new AccountStatus(id, name, description);

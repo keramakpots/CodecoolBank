@@ -13,6 +13,7 @@ import model.Customer;
 import model.SavingAccount;
 
 public class AccountDaoImpl implements AccountDao {
+
     private Connection connection;
     private AccountStatusDaoImpl accountStatusDao;
     private AccountTypeDaoImpl accountTypeDao;
@@ -45,7 +46,8 @@ public class AccountDaoImpl implements AccountDao {
                 BigInteger balance = BigInteger.valueOf(rs.getInt("Balance"));
                 BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
                 Integer interest = rs.getInt("Interest");
-                SavingAccount savingAccount = new SavingAccount(accountID, customer, number, accountType, accountStatus, openDate, balance, debitLine, interest);
+                SavingAccount savingAccount = new SavingAccount(accountID, customer, number,
+                    accountType, accountStatus, openDate, balance, debitLine, interest);
                 savingAccountsList.add(savingAccount);
             }
             rs.close();
@@ -62,7 +64,8 @@ public class AccountDaoImpl implements AccountDao {
         SavingAccount savingAccount = null;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Accounts WHERE AccountID = '"+id+"';");
+            ResultSet rs = stmt
+                .executeQuery("SELECT * FROM Accounts WHERE AccountID = '" + id + "';");
             Integer accountID = rs.getInt("AccountID");
             Integer customerID = rs.getInt("CustomerID");
             Customer customer = customerDao.find(customerID);
@@ -75,7 +78,8 @@ public class AccountDaoImpl implements AccountDao {
             BigInteger balance = BigInteger.valueOf(rs.getInt("Balance"));
             BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
             Integer interest = rs.getInt("Interest");
-            savingAccount = new SavingAccount(accountID, customer, number, accountType, accountStatus, openDate, balance, debitLine, interest);
+            savingAccount = new SavingAccount(accountID, customer, number, accountType,
+                accountStatus, openDate, balance, debitLine, interest);
             rs.close();
             stmt.close();
         } catch (Exception e) {

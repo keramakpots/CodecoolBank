@@ -1,6 +1,6 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import DAO.AccountDaoImpl;
 import java.sql.Connection;
@@ -12,8 +12,10 @@ import org.junit.jupiter.api.Test;
 
 
 class SavingAccountTest {
+
     private String pathToDB = "jdbc:sqlite:src/main/resources/Bank";
     private Connection connection;
+
     @Test
     void isSavingAccountInheritFromAbstractAccount() {
         assertTrue(SavingAccount.class.getSuperclass().equals(AbstractAccount.class));

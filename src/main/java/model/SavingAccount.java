@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.sql.Date;
 
 public class SavingAccount extends AbstractAccount {
+
     private Integer accountID;
     private Customer customerID;
     private String number;
