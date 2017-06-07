@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 class SavingAccountTest {
 
-    private String pathToDB = "jdbc:sqlite:src/main/resources/Bank";
+    private String pathToDB = "jdbc:sqlite:src/main/resources/TestBank";
     private Connection connection;
     private AccountDaoImpl accountDao;
     private SQLExecuteController sqlExecuteController = new SQLExecuteController();
