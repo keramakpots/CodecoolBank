@@ -26,21 +26,21 @@ public class MenageCustomersController {
     private Date getDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-        System.out.println(dateFormat.format(cal));
+        return Date.valueOf(dateFormat.format(cal));
     }
 
     public void createNewCustomer(String firstName, String lastName, String login, String password, Integer isActive) {
         Date createDate = getDate();
         Date lastLogin = null;
         Customer customer = new Customer(firstName, lastName, login, password, createDate, isActive, lastLogin);
-        customerDaoImpl.addCustomer(customer);
+//        customerDaoImpl.addCustomer(customer);
     }
 
     public void deActivateCustomer(Integer customerID) {
         Customer customer = customerDaoImpl.find(customerID);
         if (customer.getIsActive().equals(1)) {
             customer.setIsActive(0);
-            customerDaoImpl.update(customer);
+//            customerDaoImpl.update(customer);
         } else {
             throw new AlreadyDisactivatedException();
         }
