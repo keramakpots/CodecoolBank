@@ -1,6 +1,8 @@
 package model;
 
 
+import java.math.BigInteger;
+
 public abstract class AbstractAccount implements Account {
 
     public void deposit(double amount) {
@@ -10,9 +12,8 @@ public abstract class AbstractAccount implements Account {
     public void withdraw(double amount) {
 
     }
-
-    public double getBalance() {
-        return 0;
+    public BigInteger getBalance() {
+        return BigInteger.valueOf(0);
     }
 
     public int getAccountId() {
