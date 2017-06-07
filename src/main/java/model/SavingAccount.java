@@ -6,18 +6,18 @@ import java.sql.Date;
 
 public class SavingAccount extends AbstractAccount {
     private Integer accountID;
-    private Integer customerID;
+    private Customer customerID;
     private String number;
-    private Integer accountTypeID;
-    private Integer accountStatusID;
+    private AccountType accountTypeID;
+    private AccountStatus accountStatusID;
     private Date openDate;
     private java.math.BigInteger balance;
     private BigInteger debitLine;
     private Integer interest;
 
-    public SavingAccount(Integer accountID, Integer customerID, String number,
-        Integer accountTypeID,
-        Integer accountStatusID, Date openDate, BigInteger balance, BigInteger debitLine,
+    public SavingAccount(Integer accountID, Customer customer, String number,
+        AccountType accountType,
+        AccountStatus accountStatus, Date openDate, BigInteger balance, BigInteger debitLine,
         Integer interest) {
         super();
         this.accountID = accountID;
