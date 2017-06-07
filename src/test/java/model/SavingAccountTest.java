@@ -3,6 +3,7 @@ package model;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import DAO.AccountDaoImpl;
+import controller.SQLExecuteController;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -19,11 +20,14 @@ class SavingAccountTest {
     private String pathToDB = "jdbc:sqlite:src/main/resources/Bank";
     private Connection connection;
     private AccountDaoImpl accountDao;
+    private SQLExecuteController sqlExecuteController = new SQLExecuteController();
 
     @BeforeEach
     void setUp() throws SQLException {
         connection = DriverManager.getConnection(pathToDB);
         accountDao = new AccountDaoImpl(connection);
+        String[] args = {"--init-test-db"};
+        sqlExecuteController.executeQuery(args, connection);
     }
 
     @Test
