@@ -3,7 +3,7 @@ package model;
 
 import java.math.BigInteger;
 
-public abstract class AbstractAccount implements Account {
+public abstract class AbstractAccount implements AccountInterface {
 
     public void deposit(double amount) {
 
