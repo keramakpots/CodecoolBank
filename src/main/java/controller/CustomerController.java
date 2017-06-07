@@ -34,7 +34,7 @@ public class CustomerController {
     public Customer validatePassword(String login, String password) throws NoSuchAlgorithmException {
         Customer customer = customerDaoImpl.findByLogin(login);
         String hashedPass = HashPassword(password);
-        if (hashedPass == customer.getPassword()) {
+        if (hashedPass.equals(customer.getPassword())) {
             return customer;
         } else {
             throw new WrongPasswordException();

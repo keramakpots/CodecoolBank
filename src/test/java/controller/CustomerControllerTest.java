@@ -35,7 +35,7 @@ class CustomerControllerTest {
 
     @Test
     void testValidatePassword() throws NoSuchAlgorithmException {
-        assertEquals(customerController.validatePassword("adam_malysz", "1234")., "Adam");
+        assertEquals(customerController.validatePassword("adam_malysz", "1234").getName(), "Adam");
     }
 
 }
