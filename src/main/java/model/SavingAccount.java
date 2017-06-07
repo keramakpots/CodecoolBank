@@ -7,10 +7,10 @@ import java.sql.Date;
 public class SavingAccount extends AbstractAccount {
 
     private Integer accountID;
-    private Customer customerID;
+    private Customer customer;
     private String number;
-    private AccountType accountTypeID;
-    private AccountStatus accountStatusID;
+    private AccountType accountType;
+    private AccountStatus accountStatus;
     private Date openDate;
     private java.math.BigInteger balance;
     private BigInteger debitLine;
@@ -22,13 +22,18 @@ public class SavingAccount extends AbstractAccount {
         Integer interest) {
         super();
         this.accountID = accountID;
-        this.customerID = customerID;
+        this.customer = customer;
         this.number = number;
-        this.accountTypeID = accountTypeID;
-        this.accountStatusID = accountStatusID;
+        this.accountType = accountType;
+        this.accountStatus = accountStatus;
         this.openDate = openDate;
         this.balance = balance;
         this.debitLine = debitLine;
         this.interest = interest;
+    }
+
+    @Override
+    public BigInteger getBalance() {
+        return this.balance;
     }
 }
