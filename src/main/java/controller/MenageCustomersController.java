@@ -10,6 +10,7 @@ import model.AccountType;
 import model.Customer;
 
 import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -37,19 +38,19 @@ public class MenageCustomersController {
         return Date.valueOf(dateFormat.format(cal));
     }
 
-    public void createNewCustomer(String firstName, String lastName, String login, String password, Integer isActive) {
+    public void createNewCustomer(String firstName, String lastName, String login, String password, Integer isActive) throws NoSuchAlgorithmException {
         Date createDate = getDate();
         Date lastLogin = null;
-        pass
-        Customer customer = new Customer(firstName, lastName, login, password, createDate, isActive, lastLogin);
-//        customerDaoImpl.addCustomer(customer);
+        String hashedPass = CustomerController.HashPassword(password);
+        Customer customer = new Customer(firstName, lastName, login, hashedPass, createDate, isActive, lastLogin);
+        customerDaoImpl.addCustomer(customer);
     }
 
     public void deActivateCustomer(Integer customerID) {
         Customer customer = customerDaoImpl.find(customerID);
         if (customer.getIsActive().equals(1)) {
             customer.setIsActive(0);
-//            customerDaoImpl.update(customer);
+            customerDaoImpl.update(customer);
         } else {
             throw new AlreadyDisactivatedException();
         }
@@ -58,7 +59,7 @@ public class MenageCustomersController {
 
     public void addANewAccount(Customer customer,
                                AccountType accountType,
-                               AccountStatus accountStatus, Date openDate, BigInteger balance, BigInteger debitLine,
+                               AccountStatus accountStatus, BigInteger balance, BigInteger debitLine,
                                Integer interest) {
         Random random = new Random();
         String number = String.format("%09d", random.nextInt(1000000000));

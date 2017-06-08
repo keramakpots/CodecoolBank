@@ -1,5 +1,10 @@
 package DAO;
 
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
+
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,10 +12,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
-import model.Account;
 
 public class AccountDaoImpl implements AccountDao {
 

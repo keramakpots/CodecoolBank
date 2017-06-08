@@ -20,7 +20,7 @@ public class CustomerController {
     }
 
 
-    public String HashPassword(String password) throws NoSuchAlgorithmException {
+    public static String HashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
         byte byteData[] = md.digest();

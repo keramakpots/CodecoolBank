@@ -52,4 +52,9 @@ public class Customer {
     public void setIsActive(Integer isActive) {
         this.isActive = isActive;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
 }
