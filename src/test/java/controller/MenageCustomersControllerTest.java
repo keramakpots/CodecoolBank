@@ -1,21 +1,20 @@
 package controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import DAO.AccountDaoImpl;
 import DAO.CustomerDaoImpl;
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import model.Account;
 import model.AccountStatus;
 import model.AccountType;
 import model.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MenageCustomersControllerTest {
 
@@ -34,7 +33,7 @@ class MenageCustomersControllerTest {
         String[] args = {"--init-test-db"};
         sqlExecuteController.executeQuery(args, connection);
         menageCustomersController = new MenageCustomersController(connection);
-
+        customerDaoImpl = new CustomerDaoImpl(connection);
     }
 
 
@@ -47,14 +46,14 @@ class MenageCustomersControllerTest {
     @Test
     void testDeActivateCustomer() {
         Customer customer = customerDaoImpl.findByLogin("adam_malysz");
-        menageCustomersController.blockAnAcount(customer.getID());
-        assertEquals(customer.getIsActive().toString(), 0);
+        menageCustomersController.deActivateCustomer(customer.getID());
+        customer.setIsActive(0);
+        assertEquals(customer.getIsActive(), customerDaoImpl.find(1).getIsActive());
 
     }
 
     @Test
     void TestAddANewAccount() {
-        AccountDaoImpl accountDaoImpl = new AccountDaoImpl(connection);
         int listSize = accountDaoImpl.getAll().size();
         Customer customer = customerDaoImpl.find(1);
         AccountType accountType = new AccountType(1, "Settlement account", "Normal basic account");

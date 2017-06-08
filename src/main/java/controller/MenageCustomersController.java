@@ -4,11 +4,6 @@ import DAO.AccountDaoImpl;
 import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyDisactivatedException;
-import model.Account;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
-
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -16,6 +11,10 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
 
 
 public class MenageCustomersController {
@@ -41,7 +40,7 @@ public class MenageCustomersController {
 
     public void createNewCustomer(String firstName, String lastName, String login, String password, Integer isActive) throws NoSuchAlgorithmException {
         Date createDate = getDate();
-        Date lastLogin = null;
+        Date lastLogin = getDate();
         String hashedPass = CustomerController.HashPassword(password);
         Customer customer = new Customer(firstName, lastName, login, hashedPass, createDate, isActive, lastLogin);
         customerDaoImpl.addCustomer(customer);
