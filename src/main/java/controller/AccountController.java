@@ -3,7 +3,7 @@ package controller;
 import java.math.BigInteger;
 import model.AccountControllerInterface;
 
-public class AccountControllerController implements AccountControllerInterface {
+public class AccountController implements AccountControllerInterface {
 
     public void deposit(double amount) {
 
