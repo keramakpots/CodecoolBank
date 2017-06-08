@@ -17,12 +17,11 @@ import model.TransactionType;
 public class AccountController implements AccountControllerInterface {
 
     private AccountDaoImpl accountDaoImpl;
-    private Connection connection;
     private TransactionTypesDaoImpl transactionTypesDaoImpl;
     private TransactionStatusesDaoImpl transactionStatusesDaoImpl;
     private TransactionDaoImpl transactionDaoImpl;
 
-    public AccountController() {
+    public AccountController(Connection connection) {
         this.accountDaoImpl = new AccountDaoImpl(connection);
         this.transactionTypesDaoImpl = new TransactionTypesDaoImpl(connection);
         this.transactionStatusesDaoImpl = new TransactionStatusesDaoImpl(connection);
@@ -36,14 +35,6 @@ public class AccountController implements AccountControllerInterface {
 
     public void withdraw(double amount) {
 
-    }
-
-    public BigInteger getBalance() {
-        return null;
-    }
-
-    public int getAccountId() {
-        return 0;
     }
 
     public void transferAccountToAccount(Integer accountID, String accountNumber, Integer amount,
