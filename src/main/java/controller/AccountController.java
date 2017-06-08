@@ -1,9 +1,31 @@
 package controller;
 
+import DAO.AccountDaoImpl;
+import DAO.TransactionDaoImpl;
+import DAO.TransactionStatusesDaoImpl;
+import DAO.TransactionTypesDaoImpl;
+import exceptions.NotEnoughMoneyException;
+import model.*;
+
 import java.math.BigInteger;
-import model.AccountControllerInterface;
+import java.sql.Connection;
+import java.sql.Date;
 
 public class AccountController implements AccountControllerInterface {
+
+    private AccountDaoImpl accountDaoImpl;
+    private Connection connection;
+    private TransactionTypesDaoImpl transactionTypesDaoImpl;
+    private TransactionStatusesDaoImpl transactionStatusesDaoImpl;
+    private TransactionDaoImpl transactionDaoImpl;
+
+    public AccountController() {
+        this.accountDaoImpl = new AccountDaoImpl(connection);
+        this.transactionTypesDaoImpl = new TransactionTypesDaoImpl(connection);
+        this.transactionStatusesDaoImpl = new TransactionStatusesDaoImpl(connection);
+        this.transactionDaoImpl = new TransactionDaoImpl(connection);
+
+    }
 
     public void deposit(double amount) {
 
@@ -20,4 +42,30 @@ public class AccountController implements AccountControllerInterface {
     public int getAccountId() {
         return 0;
     }
+
+    public void transferAccountToAccount(Integer accountID, String accountNumber, Integer amount,
+                                         Integer transactionTypeID, String description) {
+        Account account = accountDaoImpl.find(accountID);
+        if (account.getBalance().compareTo(BigInteger.valueOf(amount)) == 1) {
+            account.setBalance(account.getBalance().subtract(BigInteger.valueOf(amount)));
+            accountDaoImpl.update(account);
+            Account destinationAccount = accountDaoImpl.findByNumber(accountNumber);
+            destinationAccount.setBalance(destinationAccount.getBalance().add(BigInteger.valueOf(amount)));
+            accountDaoImpl.update(destinationAccount);
+            Date date = model.Date.getDate();
+            TransactionType transactionType = transactionTypesDaoImpl.find(transactionTypeID);
+            TransactionStatus transactionStatus = transactionStatusesDaoImpl.find(1);
+            Transaction transaction = new Transaction(date, transactionType, BigInteger.valueOf(amount), description,
+                    transactionStatus, account, null, destinationAccount);
+            transactionDaoImpl.add(transaction);
+        } else {
+            throw new NotEnoughMoneyException();
+        }
+
+
+    }
 }
+
+
+
+
