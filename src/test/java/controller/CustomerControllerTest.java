@@ -42,4 +42,9 @@ class CustomerControllerTest {
             customerController.validatePassword("adam_malysz", "12345").getName();
         });
     }
+
+    @Test
+    void testOfGetAccountsList() {
+        assertEquals(1, customerController.getAccountsList(1).size());
+    }
 }

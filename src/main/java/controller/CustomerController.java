@@ -1,10 +1,13 @@
 package controller;
 
+import DAO.AccountDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.WrongPasswordException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.util.List;
+import model.Account;
 import model.Customer;
 
 
@@ -38,7 +41,10 @@ public class CustomerController {
         } else {
             throw new WrongPasswordException();
         }
+    }
 
-
+    public List<Account> getAccountsList(Integer customerID) {
+        List<Account> accounts = new AccountDaoImpl(connection).getAllByCustomer(customerID);
+        return accounts;
     }
 }
