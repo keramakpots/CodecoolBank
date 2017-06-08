@@ -1,8 +1,7 @@
 package DAO;
 
-import model.Account;
-
 import java.util.List;
+import model.Account;
 
 public interface AccountDao {
 

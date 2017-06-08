@@ -3,13 +3,12 @@ package model;
 import java.math.BigInteger;
 
 public interface AccountInterface {
+    public void deposit(double amount);
 
-    void deposit(double amount);
+    public void withdraw(double amount);
 
-    void withdraw(double amount);
+    public BigInteger getBalance();
 
-    BigInteger getBalance();
-
-    int getAccountId();
+    public int getAccountId();
 
 }

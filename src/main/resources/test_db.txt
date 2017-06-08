@@ -79,15 +79,15 @@ CREATE TABLE "Transactions" (
 	`DateOfTransaction`	TEXT NOT NULL,
 	`TransactionTypeID`	INTEGER NOT NULL,
 	`Value`	INTEGER NOT NULL,
-	`Description`	INTEGER NOT NULL,
+	`Description`	TEXT NOT NULL,
 	`TransactionStatusID`	INTEGER NOT NULL,
 	`SourceAcountID`	INTEGER NOT NULL,
 	`SourceCardID`	INTEGER,
 	`DestinationAccountID`	INTEGER NOT NULL
 );
-INSERT INTO "Transactions" VALUES(1,'30-05-2017',2,100,'Przelew',0,1,'',2);
-INSERT INTO "Transactions" VALUES(2,'24-05-2017',1,200,'Przelew',0,1,NULL,2);
-INSERT INTO "Transactions" VALUES(3,'26-04-2017',3,300,'Przekaz',0,1,1,'');
+INSERT INTO "Transactions" VALUES(1,'2017-10-01',2,100,'Przelew',0,1,'',2);
+INSERT INTO "Transactions" VALUES(2,'2017-10-01',1,200,'Przelew',0,1,NULL,2);
+INSERT INTO "Transactions" VALUES(3,'2017-10-01',3,300,'Przekaz',0,1,1,'');
 DROP TABLE IF EXISTS Cards;
 CREATE TABLE "Cards" (
 	`CardID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
