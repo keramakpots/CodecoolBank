@@ -1,14 +1,21 @@
 package controller;
 
+import DAO.AccountDaoImpl;
+import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyDisactivatedException;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
 import model.Customer;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 
 /**
@@ -17,10 +24,14 @@ import java.util.Calendar;
 public class MenageCustomersController {
     private Connection connection;
     private CustomerDaoImpl customerDaoImpl;
+    private AccountDaoImpl accountDaoImpl;
+    private AccountStatusDaoImpl accountStatusDaoImpl;
 
     public MenageCustomersController(Connection connection) {
         this.connection = connection;
         this.customerDaoImpl = new CustomerDaoImpl(connection);
+        this.accountDaoImpl = new AccountDaoImpl(connection);
+        this.accountStatusDaoImpl = new AccountStatusDaoImpl(connection);
     }
 
     private Date getDate() {
@@ -47,10 +58,25 @@ public class MenageCustomersController {
 
     }
 
-    public void addANewAccount() {
+    public void addANewAccount(Customer customer,
+                               AccountType accountType,
+                               AccountStatus accountStatus, Date openDate, BigInteger balance, BigInteger debitLine,
+                               Integer interest) {
+        Random random = new Random();
+        String number = String.format("%09d", random.nextInt(1000000000));
+        Date date = getDate();
+        Account account = new Account(customer, number, accountType, accountStatus, date, balance, debitLine, interest);
+        accountDaoImpl.addAccount(account);
+
     }
 
-    public void blockAnAcount() {
+    public void blockAnAcount(Integer AccountID) {
+        Account account = accountDaoImpl.find(AccountID);
+        if (account.getAccountStatus().equals(accountStatusDaoImpl.find(1))) {
+            account.setAccountStatus(accountStatusDaoImpl.find(3));
+        } else {
+            
+        }
     }
 
     public void unblockAnAcount() {

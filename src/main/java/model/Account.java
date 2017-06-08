@@ -32,7 +32,31 @@ public class Account {
         this.interest = interest;
     }
 
+    public Account(Customer customer, String number,
+                   AccountType accountType,
+                   AccountStatus accountStatus, Date openDate, BigInteger balance, BigInteger debitLine,
+                   Integer interest) {
+        super();
+        this.customer = customer;
+        this.number = number;
+        this.accountType = accountType;
+        this.accountStatus = accountStatus;
+        this.openDate = openDate;
+        this.balance = balance;
+        this.debitLine = debitLine;
+        this.interest = interest;
+    }
+
+    @Override
     public BigInteger getBalance() {
         return this.balance;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
     }
 }
