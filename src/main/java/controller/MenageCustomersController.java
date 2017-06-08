@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.AccountDaoImpl;
+import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyDisactivatedException;
 import model.Account;
@@ -24,11 +25,13 @@ public class MenageCustomersController {
     private Connection connection;
     private CustomerDaoImpl customerDaoImpl;
     private AccountDaoImpl accountDaoImpl;
+    private AccountStatusDaoImpl accountStatusDaoImpl;
 
     public MenageCustomersController(Connection connection) {
         this.connection = connection;
         this.customerDaoImpl = new CustomerDaoImpl(connection);
         this.accountDaoImpl = new AccountDaoImpl(connection);
+        this.accountStatusDaoImpl = new AccountStatusDaoImpl(connection);
     }
 
     private Date getDate() {
@@ -69,7 +72,11 @@ public class MenageCustomersController {
 
     public void blockAnAcount(Integer AccountID) {
         Account account = accountDaoImpl.find(AccountID);
-        if (account.getAccountStatus().equals()
+        if (account.getAccountStatus().equals(accountStatusDaoImpl.find(1))) {
+            account.setAccountStatus(accountStatusDaoImpl.find(3));
+        } else {
+            
+        }
     }
 
     public void unblockAnAcount() {
