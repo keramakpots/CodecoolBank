@@ -66,4 +66,11 @@ public class Customer {
         this.accountList = accountList;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public Integer getID() {
+        return id;
+    }
 }

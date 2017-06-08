@@ -47,7 +47,6 @@ public class Account {
         this.interest = interest;
     }
 
-    @Override
     public BigInteger getBalance() {
         return this.balance;
     }
@@ -58,5 +57,33 @@ public class Account {
 
     public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public Integer getAccountID() {
+        return accountID;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public Date getOpenDate() {
+        return openDate;
+    }
+
+    public BigInteger getDebitLine() {
+        return debitLine;
+    }
+
+    public Integer getInterest() {
+        return interest;
     }
 }

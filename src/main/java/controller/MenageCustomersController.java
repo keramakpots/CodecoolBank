@@ -4,11 +4,6 @@ import DAO.AccountDaoImpl;
 import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyDisactivatedException;
-import model.Account;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
-
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,11 +11,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
 
-
-/**
- * Created by oskar on 07.06.17.
- */
 public class MenageCustomersController {
     private Connection connection;
     private CustomerDaoImpl customerDaoImpl;
