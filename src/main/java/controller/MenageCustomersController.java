@@ -4,11 +4,6 @@ import DAO.AccountDaoImpl;
 import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyDisactivatedException;
-import model.Account;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
-
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,6 +11,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
 
 public class MenageCustomersController {
     private Connection connection;
@@ -40,14 +39,14 @@ public class MenageCustomersController {
         Date createDate = getDate();
         Date lastLogin = null;
         Customer customer = new Customer(firstName, lastName, login, password, createDate, isActive, lastLogin);
-//        customerDaoImpl.addCustomer(customer);
+        customerDaoImpl.addCustomer(customer);
     }
 
     public void deActivateCustomer(Integer customerID) {
         Customer customer = customerDaoImpl.find(customerID);
         if (customer.getIsActive().equals(1)) {
             customer.setIsActive(0);
-//            customerDaoImpl.update(customer);
+            customerDaoImpl.update(customer);
         } else {
             throw new AlreadyDisactivatedException();
         }

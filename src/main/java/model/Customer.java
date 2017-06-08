@@ -73,4 +73,16 @@ public class Customer {
     public Integer getID() {
         return id;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
 }
