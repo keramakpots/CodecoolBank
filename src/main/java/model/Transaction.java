@@ -15,9 +15,22 @@ public class Transaction {
     private Account destinationAccount;
 
     public Transaction(Integer id, Date dateOfTransaction, TransactionType transactionType,
-        BigInteger value, String description, TransactionStatus transactionStatus, Account baseAccount, Card card,
-        Account destinationAccount) {
+                       BigInteger value, String description, TransactionStatus transactionStatus, Account baseAccount, Card card,
+                       Account destinationAccount) {
         this.id = id;
+        this.dateOfTransaction = dateOfTransaction;
+        this.transactionType = transactionType;
+        this.value = value;
+        this.description = description;
+        this.transactionStatus = transactionStatus;
+        this.baseAccount = baseAccount;
+        this.card = card;
+        this.destinationAccount = destinationAccount;
+    }
+
+    public Transaction(Date dateOfTransaction, TransactionType transactionType,
+                       BigInteger value, String description, TransactionStatus transactionStatus, Account baseAccount, Card card,
+                       Account destinationAccount) {
         this.dateOfTransaction = dateOfTransaction;
         this.transactionType = transactionType;
         this.value = value;

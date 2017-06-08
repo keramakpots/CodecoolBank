@@ -51,6 +51,10 @@ public class Account {
         return this.balance;
     }
 
+    public void setBalance(BigInteger balance) {
+        this.balance = balance;
+    }
+
     public AccountStatus getAccountStatus() {
         return accountStatus;
     }
@@ -87,3 +91,4 @@ public class Account {
         return interest;
     }
 }
+
