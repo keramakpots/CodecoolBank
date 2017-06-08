@@ -1,10 +1,5 @@
 package DAO;
 
-import model.Account;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
-
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
 
 public class AccountDaoImpl implements AccountDao {
 
@@ -80,7 +79,7 @@ public class AccountDaoImpl implements AccountDao {
             BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
             Integer interest = rs.getInt("Interest");
             account = new Account(accountID, customer, number, accountType, accountStatus, openDate,
-                    balance, debitLine, interest);
+                balance, debitLine, interest);
             rs.close();
             stmt.close();
         } catch (Exception e) {
@@ -99,14 +98,12 @@ public class AccountDaoImpl implements AccountDao {
             customer = customerDao.findByLogin(customerLogin);
             Integer accountTypeID = accountTypeDao.find(account.getAccountType().getName());
             Integer accountStatusID = accountStatusDao.find(account.getAccountStatus().getName());
-            ResultSet rs = stmt
-                    .executeQuery(
-                            "INSERT INTO Accounts (CustomerID, Number, AccountTypeID, AccountStatusID, OpenDate, Balance, DebitLine, Interest) VALUES ('"
-                                    + customer.getID() + "','" + account.getNumber() + "','" + accountTypeID
-                                    + "','" + accountStatusID + "','" + account.getOpenDate() + "','" + account
-                                    .getBalance() + "','" + account.getDebitLine() + "','" + account
-                                    .getInterest() + "')");
-            rs.close();
+            stmt.executeQuery(
+                "INSERT INTO Accounts (CustomerID, Number, AccountTypeID, AccountStatusID, OpenDate, Balance, DebitLine, Interest) VALUES ('"
+                    + customer.getID() + "','" + account.getNumber() + "','" + accountTypeID
+                    + "','" + accountStatusID + "','" + account.getOpenDate() + "','" + account
+                    .getBalance() + "','" + account.getDebitLine() + "','" + account
+                    .getInterest() + "')");
             stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ":AccountDaoImpl " + e.getMessage());
@@ -121,15 +118,13 @@ public class AccountDaoImpl implements AccountDao {
             Customer customer = account.getCustomer();
             Integer accountTypeID = accountTypeDao.find(account.getAccountType().getName());
             Integer accountStatusID = accountStatusDao.find(account.getAccountStatus().getName());
-            ResultSet rs = stmt
-                    .executeQuery(
-                            "UPDATE Accounts SET CustomerID = '" + customer.getID() + "', Number = '"
-                                    + account.getNumber() + "', AccountTypeID = '" + accountTypeID
-                                    + "', AccountStatusID = '" + accountStatusID + "', OpenDate = '" + account
-                                    .getOpenDate() + "', Balance = '" + account.getBalance()
-                                    + "', DebitLine = '" + account.getDebitLine() + "', Interest = '" + account
-                                    .getInterest() + "' WHERE AccountID = '" + account.getAccountID() + "'");
-            rs.close();
+            stmt.executeQuery(
+                "UPDATE Accounts SET CustomerID = '" + customer.getID() + "', Number = '"
+                    + account.getNumber() + "', AccountTypeID = '" + accountTypeID
+                    + "', AccountStatusID = '" + accountStatusID + "', OpenDate = '" + account
+                    .getOpenDate() + "', Balance = '" + account.getBalance()
+                    + "', DebitLine = '" + account.getDebitLine() + "', Interest = '" + account
+                    .getInterest() + "' WHERE AccountID = '" + account.getAccountID() + "'");
             stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ":AccountDaoImpl " + e.getMessage());

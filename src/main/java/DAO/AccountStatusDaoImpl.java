@@ -39,7 +39,7 @@ public class AccountStatusDaoImpl {
             stmt = connection.createStatement();
             ResultSet rs = stmt
                 .executeQuery("SELECT * FROM AccountStatuses WHERE Name = '" + name + "';");
-            accountStatusID = rs.getInt("AccountTypeID");
+            accountStatusID = rs.getInt("AccountStatusID");
             rs.close();
             stmt.close();
         } catch (Exception e) {

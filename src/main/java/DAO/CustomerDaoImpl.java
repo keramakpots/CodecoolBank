@@ -59,7 +59,7 @@ public class CustomerDaoImpl {
             rs.close();
             stmt.close();
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ":AccountDaoImpl " + e.getMessage());
+            System.err.println(e.getClass().getName() + ":CustomerDaoImpl " + e.getMessage());
             e.printStackTrace();
         }
         return customer;
@@ -69,8 +69,7 @@ public class CustomerDaoImpl {
         Statement stmt;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt
-                .executeQuery(
+            stmt.executeQuery(
                     "UPDATE Customers SET FirstName = '"
                         + customer.getName() + "', LastName = '" + customer.getLastName()
                         + "', Login = '" + customer.getLogin() + "', Password = '" + customer
@@ -78,7 +77,6 @@ public class CustomerDaoImpl {
                         + "', CreateDate = '" + customer.getCreateDate()
                         + "', IsActive = '" + customer.getIsActive() + "', LastLogin = '" + customer
                         .getLastLogin() + "' WHERE CustomerID = '" + customer.getID() + "'");
-            rs.close();
             stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ":CustomerDaoImpl " + e.getMessage());
@@ -90,14 +88,12 @@ public class CustomerDaoImpl {
         Statement stmt;
         try {
             stmt = connection.createStatement();
-            ResultSet rs = stmt
-                .executeQuery(
+            stmt.executeQuery(
                     "INSERT INTO Customers (FirstName, LastName, Login, Password, CreateDate, IsActive, LastLogin) VALUES ('"
                         + customer.getName() + "','" + customer.getLastName() + "','" + customer
                         .getLogin()
                         + "','" + customer.getPassword() + "','" + customer.getCreateDate() + "','"
                         + customer.getIsActive() + "','" + customer.getLastLogin() + "')");
-            rs.close();
             stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ":CustomerDaoImpl " + e.getMessage());
