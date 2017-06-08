@@ -72,6 +72,7 @@ public class MenageCustomersController {
         Account account = accountDaoImpl.find(AccountID);
         if (account.getAccountStatus().equals(accountStatusDaoImpl.find(1))) {
             account.setAccountStatus(accountStatusDaoImpl.find(3));
+            accountDaoImpl.update(account);
         } else {
             throw new AlreadyDisactivatedException();
         }
@@ -81,6 +82,7 @@ public class MenageCustomersController {
         Account account = accountDaoImpl.find(AccountID);
         if (account.getAccountStatus().equals(accountStatusDaoImpl.find(3))) {
             account.setAccountStatus(accountStatusDaoImpl.find(1));
+            accountDaoImpl.update(account);
         } else {
             throw new AlreadyDisactivatedException();
         }
