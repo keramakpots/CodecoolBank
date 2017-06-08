@@ -18,9 +18,6 @@ import java.util.Calendar;
 import java.util.Random;
 
 
-/**
- * Created by oskar on 07.06.17.
- */
 public class MenageCustomersController {
     private Connection connection;
     private CustomerDaoImpl customerDaoImpl;
@@ -43,6 +40,7 @@ public class MenageCustomersController {
     public void createNewCustomer(String firstName, String lastName, String login, String password, Integer isActive) {
         Date createDate = getDate();
         Date lastLogin = null;
+        pass
         Customer customer = new Customer(firstName, lastName, login, password, createDate, isActive, lastLogin);
 //        customerDaoImpl.addCustomer(customer);
     }
@@ -75,21 +73,28 @@ public class MenageCustomersController {
         if (account.getAccountStatus().equals(accountStatusDaoImpl.find(1))) {
             account.setAccountStatus(accountStatusDaoImpl.find(3));
         } else {
-            
+            throw new AlreadyDisactivatedException();
         }
     }
 
-    public void unblockAnAcount() {
+    public void unblockAnAcount(Integer AccountID) {
+        Account account = accountDaoImpl.find(AccountID);
+        if (account.getAccountStatus().equals(accountStatusDaoImpl.find(3))) {
+            account.setAccountStatus(accountStatusDaoImpl.find(1));
+        } else {
+            throw new AlreadyDisactivatedException();
+        }
     }
 
-    public void AddANewCard() {
-    }
-
-    public void BlockACard() {
-    }
-
-    public void UnblockACard() {
-    }
-
+//    public void AddANewCard() {
+//
+//    }
+//
+//    public void BlockACard() {
+//    }
+//
+//    public void UnblockACard() {
+//    }
+//
 
 }
