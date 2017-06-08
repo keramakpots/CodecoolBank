@@ -45,5 +45,4 @@ class AccountTest {
             BigInteger.valueOf(2000), BigInteger.valueOf(500), 3);
         assertTrue(accountTest.getBalance().equals(accountDao.find(1).getBalance()));
     }
-
 }
