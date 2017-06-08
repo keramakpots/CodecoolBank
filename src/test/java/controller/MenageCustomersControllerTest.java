@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import DAO.AccountDaoImpl;
 import DAO.CustomerDaoImpl;
+import DAO.DatabaseConnector;
 import exceptions.AlreadyActiveException;
 import exceptions.AlreadyDisactivatedException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import model.Account;
 import model.AccountStatus;
@@ -31,7 +31,7 @@ class MenageCustomersControllerTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        connection = DriverManager.getConnection(pathToDB);
+        connection = new DatabaseConnector().connect(pathToDB);
         accountDaoImpl = new AccountDaoImpl(connection);
         String[] args = {"--init-test-db"};
         sqlExecuteController.executeQuery(args, connection);
