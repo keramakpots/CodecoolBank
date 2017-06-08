@@ -27,11 +27,11 @@ public class Customer {
         this.createDate = createDate;
         this.isActive = isActive;
         this.lastLogin = lastLogin;
-        this.accountList = new ArrayList<Account>();
+        this.accountList = new ArrayList<>();
     }
 
     public Customer(String firstName, String lastName, String login,
-                    String password, Date createDate, Integer isActive, Date lastLogin) {
+        String password, Date createDate, Integer isActive, Date lastLogin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;

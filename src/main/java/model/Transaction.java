@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public class Transaction {
+
     private Integer id;
     private Date dateOfTransaction;
     private TransactionType transactionType;
@@ -32,4 +33,32 @@ public class Transaction {
         return value;
     }
 
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public TransactionStatus getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public Account getBaseAccount() {
+        return baseAccount;
+    }
+
+    public Account getDestinationAccount() {
+        return destinationAccount;
+    }
+
+    public Date getDateOfTransaction() {
+        return dateOfTransaction;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Card getCard() {
+        return card;
+    }
 }
