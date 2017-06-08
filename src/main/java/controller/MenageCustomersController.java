@@ -4,6 +4,11 @@ import DAO.AccountDaoImpl;
 import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyDisactivatedException;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
+
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,10 +16,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
-import model.Account;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
 
 public class MenageCustomersController {
     private Connection connection;
@@ -69,22 +70,31 @@ public class MenageCustomersController {
         Account account = accountDaoImpl.find(AccountID);
         if (account.getAccountStatus().equals(accountStatusDaoImpl.find(1))) {
             account.setAccountStatus(accountStatusDaoImpl.find(3));
+            accountDaoImpl.update(account);
         } else {
-            
+            throw new AlreadyDisactivatedException();
         }
     }
 
-    public void unblockAnAcount() {
+    public void unblockAnAcount(Integer AccountID) {
+        Account account = accountDaoImpl.find(AccountID);
+        if (account.getAccountStatus().equals(accountStatusDaoImpl.find(3))) {
+            account.setAccountStatus(accountStatusDaoImpl.find(1));
+            accountDaoImpl.update(account);
+        } else {
+            throw new AlreadyDisactivatedException();
+        }
     }
 
-    public void AddANewCard() {
-    }
-
-    public void BlockACard() {
-    }
-
-    public void UnblockACard() {
-    }
-
+//    public void AddANewCard() {
+//
+//    }
+//
+//    public void BlockACard() {
+//    }
+//
+//    public void UnblockACard() {
+//    }
+//
 
 }
