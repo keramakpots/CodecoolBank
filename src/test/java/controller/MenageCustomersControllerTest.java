@@ -1,13 +1,16 @@
 package controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import DAO.AccountDaoImpl;
 import DAO.CustomerDaoImpl;
+import DAO.DatabaseConnector;
+import exceptions.AlreadyActiveException;
+import exceptions.AlreadyDisactivatedException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import model.Account;
 import model.AccountStatus;
@@ -28,7 +31,7 @@ class MenageCustomersControllerTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        connection = DriverManager.getConnection(pathToDB);
+        connection = new DatabaseConnector().connect(pathToDB);
         accountDaoImpl = new AccountDaoImpl(connection);
         String[] args = {"--init-test-db"};
         sqlExecuteController.executeQuery(args, connection);
@@ -82,4 +85,21 @@ class MenageCustomersControllerTest {
         assertEquals(account.getAccountStatus().getId(), accountDaoImpl.find(1).getAccountID());
     }
 
+    @Test
+    void testIsDeActivateCustomerThrowsAlreadyDisactiveException() {
+        Customer customer = customerDaoImpl.findByLogin("adam_malysz");
+        menageCustomersController.deActivateCustomer(customer.getID());
+        assertThrows(AlreadyDisactivatedException.class, () -> {
+            menageCustomersController.deActivateCustomer(customer.getID());
+        });
+    }
+
+    @Test
+    void testIsUnBlockAnAccountThrowsAlreadyActiveException() {
+        menageCustomersController.blockAnAccount(1);
+        menageCustomersController.unblockAnAccount(1);
+        assertThrows(AlreadyActiveException.class, () -> {
+            menageCustomersController.unblockAnAccount(1);
+        });
+    }
 }

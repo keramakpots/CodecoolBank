@@ -131,4 +131,33 @@ public class AccountDaoImpl implements AccountDao {
             e.printStackTrace();
         }
     }
+
+    public Account findByNumber(String number) {
+        Statement stmt;
+        Account account = null;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt
+                .executeQuery("SELECT * FROM Accounts WHERE Number = '" + number + "';");
+            Integer accountID = rs.getInt("AccountID");
+            Integer customerID = rs.getInt("CustomerID");
+            Customer customer = customerDao.find(customerID);
+            Integer accountTypeID = rs.getInt("AccountTypeID");
+            AccountType accountType = accountTypeDao.find(accountTypeID);
+            Integer accountStatusID = rs.getInt("AccountStatusID");
+            AccountStatus accountStatus = accountStatusDao.find(accountStatusID);
+            Date openDate = Date.valueOf(rs.getString("OpenDate"));
+            BigInteger balance = BigInteger.valueOf(rs.getInt("Balance"));
+            BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
+            Integer interest = rs.getInt("Interest");
+            account = new Account(accountID, customer, number, accountType, accountStatus, openDate,
+                balance, debitLine, interest);
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":AccountDaoImpl " + e.getMessage());
+            e.printStackTrace();
+        }
+        return account;
+    }
 }
