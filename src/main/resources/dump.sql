@@ -28,7 +28,7 @@ CREATE TABLE `AccountStatuses` (
 );
 INSERT INTO "AccountStatuses" VALUES(1,'active','Normal status');
 INSERT INTO "AccountStatuses" VALUES(2,'disabled',NULL);
-INSERT INTO "AccountStatuses" VALUES(3,'banned','Account taken by the bailiff');
+INSERT INTO "AccountStatuses" VALUES(3,'banned','AccountInterface taken by the bailiff');
 DROP TABLE IF EXISTS CardStatuses;
 CREATE TABLE `CardStatuses` (
 	`CardStatusID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,

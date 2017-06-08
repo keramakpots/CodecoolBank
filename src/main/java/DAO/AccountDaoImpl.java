@@ -1,5 +1,10 @@
 package DAO;
 
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
+
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,10 +12,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
-import model.SavingAccount;
 
 public class AccountDaoImpl implements AccountDao {
 
@@ -27,9 +28,9 @@ public class AccountDaoImpl implements AccountDao {
         this.customerDao = new CustomerDaoImpl(connection);
     }
 
-    public List<SavingAccount> getAll() {
+    public List<Account> getAll() {
         Statement stmt;
-        ArrayList<SavingAccount> savingAccountsList = new ArrayList();
+        ArrayList<Account> accountsList = new ArrayList();
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Accounts;");
@@ -46,9 +47,9 @@ public class AccountDaoImpl implements AccountDao {
                 BigInteger balance = BigInteger.valueOf(rs.getInt("Balance"));
                 BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
                 Integer interest = rs.getInt("Interest");
-                SavingAccount savingAccount = new SavingAccount(accountID, customer, number,
+                Account account = new Account(accountID, customer, number,
                     accountType, accountStatus, openDate, balance, debitLine, interest);
-                savingAccountsList.add(savingAccount);
+                accountsList.add(account);
             }
             rs.close();
             stmt.close();
@@ -56,12 +57,12 @@ public class AccountDaoImpl implements AccountDao {
             System.err.println(e.getClass().getName() + ":AccountDaoImpl " + e.getMessage());
             e.printStackTrace();
         }
-        return savingAccountsList;
+        return accountsList;
     }
 
-    public SavingAccount find(Integer id) {
+    public Account find(Integer id) {
         Statement stmt;
-        SavingAccount savingAccount = null;
+        Account account = null;
         try {
             stmt = connection.createStatement();
             ResultSet rs = stmt
@@ -78,13 +79,13 @@ public class AccountDaoImpl implements AccountDao {
             BigInteger balance = BigInteger.valueOf(rs.getInt("Balance"));
             BigInteger debitLine = BigInteger.valueOf(rs.getInt("DebitLine"));
             Integer interest = rs.getInt("Interest");
-            savingAccount = new SavingAccount(accountID, customer, number, accountType, accountStatus, openDate, balance, debitLine, interest);
+            account = new Account(accountID, customer, number, accountType, accountStatus, openDate, balance, debitLine, interest);
             rs.close();
             stmt.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ":AccountDaoImpl " + e.getMessage());
             e.printStackTrace();
         }
-        return savingAccount;
+        return account;
     }
 }
