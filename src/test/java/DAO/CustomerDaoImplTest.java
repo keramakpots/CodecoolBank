@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Account;
 import model.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +28,7 @@ class CustomerDaoImplTest {
         customerDao = new CustomerDaoImpl(connection);
         String[] args = {"--init-test-db"};
         sqlExecuteController.executeQuery(args, connection);
+        List<Account> accounts = new ArrayList<>();
         customer = new Customer(6, "Nowy", "Polski", "Wiesio", "81dc9bdb52d04dc20036dbd8313ed055",
             Date.valueOf("2015-12-15"), 1, Date.valueOf("2016-12-12"));
     }

@@ -12,6 +12,7 @@ import model.TransactionStatus;
 import model.TransactionType;
 
 public class TransactionDaoImpl {
+
     private Connection connection;
     private TransactionStatusesDaoImpl transactionStatusesDao;
     private TransactionTypesDaoImpl transactionTypesDao;
@@ -44,7 +45,8 @@ public class TransactionDaoImpl {
             Account destinationAccount = accountDao.find(destinationAccountID);
 //            Integer SourceCardID = rs.getInt("SourceCardID");
             Card card = new Card();
-            transaction = new Transaction(id, date, transactionType, value, description, transactionStatus, sourceAccount, card, destinationAccount);
+            transaction = new Transaction(id, date, transactionType, value, description,
+                transactionStatus, sourceAccount, card, destinationAccount);
             rs.close();
             stmt.close();
         } catch (Exception e) {
@@ -52,5 +54,25 @@ public class TransactionDaoImpl {
             e.printStackTrace();
         }
         return transaction;
+    }
+
+    public void add(Transaction transaction) {
+        Statement stmt;
+        try {
+            stmt = connection.createStatement();
+            TransactionType transactionType = transaction.getTransactionType();
+            TransactionStatus transactionStatus = transaction.getTransactionStatus();
+            stmt.executeQuery(
+                "INSERT INTO Transactions (DateOfTransaction, TransactionTypeID, Description, TransactionStatusID, SourceAcountID, SourceCardID, DestinationAccountID) VALUES ('"
+                    + transaction.getDateOfTransaction() + "','" + transactionType.getId() + "','"
+                    + transaction.getDescription()
+                    + "','" + transactionStatus.getId() + "','" + transaction.getBaseAccount()
+                    .getAccountID() + "','" + transaction.getCard().getId() + "','" + transaction
+                    .getDestinationAccount().getAccountID() + "')");
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":TransactionDaoImpl " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

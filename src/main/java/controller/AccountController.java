@@ -5,11 +5,14 @@ import DAO.TransactionDaoImpl;
 import DAO.TransactionStatusesDaoImpl;
 import DAO.TransactionTypesDaoImpl;
 import exceptions.NotEnoughMoneyException;
-import model.*;
-
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
+import model.Account;
+import model.AccountControllerInterface;
+import model.Transaction;
+import model.TransactionStatus;
+import model.TransactionType;
 
 public class AccountController implements AccountControllerInterface {
 
@@ -44,7 +47,7 @@ public class AccountController implements AccountControllerInterface {
     }
 
     public void transferAccountToAccount(Integer accountID, String accountNumber, Integer amount,
-                                         Integer transactionTypeID, String description) {
+        Integer transactionTypeID, String description) {
         Account account = accountDaoImpl.find(accountID);
         if (account.getBalance().compareTo(BigInteger.valueOf(amount)) == 1) {
             account.setBalance(account.getBalance().subtract(BigInteger.valueOf(amount)));
@@ -52,11 +55,11 @@ public class AccountController implements AccountControllerInterface {
             Account destinationAccount = accountDaoImpl.findByNumber(accountNumber);
             destinationAccount.setBalance(destinationAccount.getBalance().add(BigInteger.valueOf(amount)));
             accountDaoImpl.update(destinationAccount);
-            Date date = model.Date.getDate();
+            Date date = Util.Date.getDate();
             TransactionType transactionType = transactionTypesDaoImpl.find(transactionTypeID);
             TransactionStatus transactionStatus = transactionStatusesDaoImpl.find(1);
             Transaction transaction = new Transaction(date, transactionType, BigInteger.valueOf(amount), description,
-                    transactionStatus, account, null, destinationAccount);
+                transactionStatus, account, null, destinationAccount);
             transactionDaoImpl.add(transaction);
         } else {
             throw new NotEnoughMoneyException();
@@ -65,7 +68,3 @@ public class AccountController implements AccountControllerInterface {
 
     }
 }
-
-
-
-
