@@ -3,6 +3,7 @@ package controller;
 import DAO.AccountDaoImpl;
 import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
+import exceptions.AlreadyActiveException;
 import exceptions.AlreadyDisactivatedException;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -83,7 +84,7 @@ public class MenageCustomersController {
             account.setAccountStatus(accountStatusDaoImpl.find(1));
             accountDaoImpl.update(account);
         } else {
-            throw new AlreadyDisactivatedException();
+            throw new AlreadyActiveException();
         }
     }
 
