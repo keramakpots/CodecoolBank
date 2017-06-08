@@ -1,9 +1,9 @@
-package model;
-
+package controller;
 
 import java.math.BigInteger;
+import model.AccountControllerInterface;
 
-public abstract class AbstractAccount implements AccountInterface {
+public class AccountControllerController implements AccountControllerInterface {
 
     public void deposit(double amount) {
 
@@ -12,8 +12,9 @@ public abstract class AbstractAccount implements AccountInterface {
     public void withdraw(double amount) {
 
     }
+
     public BigInteger getBalance() {
-        return BigInteger.valueOf(0);
+        return null;
     }
 
     public int getAccountId() {

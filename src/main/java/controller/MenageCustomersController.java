@@ -10,7 +10,6 @@ import model.AccountType;
 import model.Customer;
 
 import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.DateFormat;

@@ -32,4 +32,21 @@ public class AccountTypeDaoImpl {
         }
         return accountType;
     }
+
+    public Integer find(String name) {
+        Statement stmt;
+        Integer accountTypeID = null;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt
+                .executeQuery("SELECT * FROM AccountTypes WHERE Name = '" + name + "';");
+            accountTypeID = rs.getInt("AccountTypeID");
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":AccountTypeDaoImpl " + e.getMessage());
+            e.printStackTrace();
+        }
+        return accountTypeID;
+    }
 }

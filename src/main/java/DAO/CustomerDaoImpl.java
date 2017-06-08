@@ -64,4 +64,44 @@ public class CustomerDaoImpl {
         }
         return customer;
     }
+
+    public void update(Customer customer) {
+        Statement stmt;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt
+                .executeQuery(
+                    "UPDATE Customers SET FirstName = '"
+                        + customer.getName() + "', LastName = '" + customer.getLastName()
+                        + "', Login = '" + customer.getLogin() + "', Password = '" + customer
+                        .getPassword()
+                        + "', CreateDate = '" + customer.getCreateDate()
+                        + "', IsActive = '" + customer.getIsActive() + "', LastLogin = '" + customer
+                        .getLastLogin() + "' WHERE CustomerID = '" + customer.getID() + "'");
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":CustomerDaoImpl " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void addCustomer(Customer customer) {
+        Statement stmt;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt
+                .executeQuery(
+                    "INSERT INTO Customers (FirstName, LastName, Login, Password, CreateDate, IsActive, LastLogin) VALUES ('"
+                        + customer.getName() + "','" + customer.getLastName() + "','" + customer
+                        .getLogin()
+                        + "','" + customer.getPassword() + "','" + customer.getCreateDate() + "','"
+                        + customer.getIsActive() + "','" + customer.getLastLogin() + "')");
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":CustomerDaoImpl " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

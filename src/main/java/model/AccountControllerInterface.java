@@ -2,7 +2,7 @@ package model;
 
 import java.math.BigInteger;
 
-public interface AccountInterface {
+public interface AccountControllerInterface {
     public void deposit(double amount);
 
     public void withdraw(double amount);

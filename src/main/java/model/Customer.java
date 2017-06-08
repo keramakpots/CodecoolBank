@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
 
@@ -12,6 +14,7 @@ public class Customer {
     private Date createDate;
     private Integer isActive;
     private Date lastLogin;
+    private List<Account> accountList;
 
 
     public Customer(Integer id, String firstName, String lastName, String login,
@@ -24,6 +27,7 @@ public class Customer {
         this.createDate = createDate;
         this.isActive = isActive;
         this.lastLogin = lastLogin;
+        this.accountList = new ArrayList<Account>();
     }
 
     public Customer(String firstName, String lastName, String login,
@@ -35,6 +39,7 @@ public class Customer {
         this.createDate = createDate;
         this.isActive = isActive;
         this.lastLogin = lastLogin;
+        this.accountList = new ArrayList<Account>();
     }
 
     public String getPassword() {
@@ -53,8 +58,31 @@ public class Customer {
         this.isActive = isActive;
     }
 
-    public Integer getId() {
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public Integer getID() {
         return id;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
 }

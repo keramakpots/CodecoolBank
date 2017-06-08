@@ -31,4 +31,21 @@ public class AccountStatusDaoImpl {
         }
         return accountStatus;
     }
+
+    public Integer find(String name) {
+        Statement stmt;
+        Integer accountStatusID = null;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt
+                .executeQuery("SELECT * FROM AccountStatuses WHERE Name = '" + name + "';");
+            accountStatusID = rs.getInt("AccountTypeID");
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ":AccountStatusDaoImpl " + e.getMessage());
+            e.printStackTrace();
+        }
+        return accountStatusID;
+    }
 }

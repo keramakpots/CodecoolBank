@@ -31,11 +31,6 @@ class AccountTest {
     }
 
     @Test
-    void isSavingAccountInheritFromAbstractAccount() {
-        assertTrue(Account.class.getSuperclass().equals(AbstractAccount.class));
-    }
-
-    @Test
     void isGetAllTakesListOfSavingAccounts() {
         List<Account> account = new ArrayList<Account>();
         assertTrue(account.getClass().equals(accountDao.getAll().getClass()));
@@ -50,5 +45,4 @@ class AccountTest {
             BigInteger.valueOf(2000), BigInteger.valueOf(500), 3);
         assertTrue(accountTest.getBalance().equals(accountDao.find(1).getBalance()));
     }
-
 }
