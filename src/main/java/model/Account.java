@@ -33,9 +33,9 @@ public class Account {
     }
 
     public Account(Customer customer, String number,
-                   AccountType accountType,
-                   AccountStatus accountStatus, Date openDate, BigInteger balance, BigInteger debitLine,
-                   Integer interest) {
+        AccountType accountType,
+        AccountStatus accountStatus, Date openDate, BigInteger balance, BigInteger debitLine,
+        Integer interest) {
         super();
         this.customer = customer;
         this.number = number;
@@ -49,10 +49,6 @@ public class Account {
 
     public BigInteger getBalance() {
         return this.balance;
-    }
-
-    public void setBalance(BigInteger balance) {
-        this.balance = balance;
     }
 
     public AccountStatus getAccountStatus() {
@@ -90,5 +86,8 @@ public class Account {
     public Integer getInterest() {
         return interest;
     }
-}
 
+    public void setBalance(BigInteger balance) {
+        this.balance = balance;
+    }
+}

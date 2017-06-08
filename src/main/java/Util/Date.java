@@ -1,12 +1,11 @@
-package model;
+
+package Util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * Created by oskar on 08.06.17.
- */
 public class Date {
+
     public static java.sql.Date getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
