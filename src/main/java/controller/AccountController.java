@@ -29,12 +29,24 @@ public class AccountController implements AccountControllerInterface {
 
     }
 
-    public void deposit(double amount) {
-
+    public void deposit(BigInteger amount, Account account) {
+        BigInteger actualBalance = account.getBalance();
+        actualBalance = actualBalance.add(amount);
+        account.setBalance(actualBalance);
+        accountDaoImpl.update(account);
     }
 
-    public void withdraw(double amount) {
-
+    public void withdraw(BigInteger amount, Account account) {
+        int result;
+        BigInteger actualBalance = account.getBalance();
+        result = actualBalance.compareTo(amount);
+        if (result == 0 || result == 1) {
+            actualBalance = actualBalance.subtract(amount);
+            account.setBalance(actualBalance);
+            accountDaoImpl.update(account);
+        } else {
+            throw new NotEnoughMoneyException();
+        }
     }
 
     public void transferAccountToAccount(Integer accountID, String accountNumber, Integer amount,

@@ -1,8 +1,11 @@
 package model;
 
-public interface AccountControllerInterface {
-    public void deposit(double amount);
+import java.math.BigInteger;
 
-    public void withdraw(double amount);
+public interface AccountControllerInterface {
+
+    public void deposit(BigInteger amount, Account account);
+
+    public void withdraw(BigInteger amount, Account account);
 
 }
