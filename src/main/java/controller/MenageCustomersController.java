@@ -10,9 +10,9 @@ import model.AccountType;
 import model.Customer;
 
 import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
@@ -32,9 +32,11 @@ public class MenageCustomersController {
     }
 
     private Date getDate() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-        return Date.valueOf(dateFormat.format(cal));
+        cal.add(Calendar.DATE, 1);
+        String formatted = dateFormat.format(cal.getTime());
+        return Date.valueOf(formatted);
     }
 
     public void createNewCustomer(String firstName, String lastName, String login, String password, Integer isActive) throws NoSuchAlgorithmException {
