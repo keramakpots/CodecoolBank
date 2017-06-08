@@ -1,6 +1,6 @@
 package DAO;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import controller.SQLExecuteController;
 import java.math.BigInteger;
@@ -28,5 +28,6 @@ class TransactionDaoImplTest {
     void TestIsFindGetsCorrectTransaction() {
         assertEquals(BigInteger.valueOf(100), transactionDao.find(1).getValue());
     }
+
 
 }

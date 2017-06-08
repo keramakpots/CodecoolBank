@@ -4,7 +4,7 @@ package model;
 import java.math.BigInteger;
 import java.sql.Date;
 
-public class Account extends AbstractAccount {
+public class Account {
 
     private Integer accountID;
     private Customer customer;
@@ -32,7 +32,6 @@ public class Account extends AbstractAccount {
         this.interest = interest;
     }
 
-    @Override
     public BigInteger getBalance() {
         return this.balance;
     }
