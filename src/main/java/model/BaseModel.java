@@ -1,7 +1,6 @@
 package model;
 
 public class BaseModel implements BaseModelInterface{
-
     private Integer id;
     private String name;
     private String description;
@@ -15,4 +14,9 @@ public class BaseModel implements BaseModelInterface{
     public String getName() {
         return name;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
 }

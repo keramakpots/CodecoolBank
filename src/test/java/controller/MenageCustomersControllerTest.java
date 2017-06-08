@@ -49,7 +49,6 @@ class MenageCustomersControllerTest {
         menageCustomersController.deActivateCustomer(customer.getID());
         customer.setIsActive(0);
         assertEquals(customer.getIsActive(), customerDaoImpl.find(1).getIsActive());
-
     }
 
     @Test
@@ -63,14 +62,24 @@ class MenageCustomersControllerTest {
 
     }
     @Test
-    void TestBlockAnAcount() {
+    void TestBlockAnAccount() {
         Account account = accountDaoImpl.find(1);
-
+        menageCustomersController.blockAnAccount(account.getAccountID());
+        AccountStatus accountStatus = new AccountStatus(3, "", "");
+        account.setAccountStatus(accountStatus);
+        assertEquals(account.getAccountStatus().getId(),
+            accountDaoImpl.find(1).getAccountStatus().getId());
     }
 
 
     @Test
-    void TestUnblockAnAcount() {
+    void TestUnblockAnAccount() {
+        Account account = accountDaoImpl.find(1);
+        menageCustomersController.blockAnAccount(account.getAccountID());
+        menageCustomersController.unblockAnAccount(account.getAccountID());
+        AccountStatus accountStatus = new AccountStatus(1, "", "");
+        account.setAccountStatus(accountStatus);
+        assertEquals(account.getAccountStatus().getId(), accountDaoImpl.find(1).getAccountID());
     }
 
 }

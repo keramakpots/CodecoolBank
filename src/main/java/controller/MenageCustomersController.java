@@ -18,13 +18,11 @@ import model.Customer;
 
 
 public class MenageCustomersController {
-    private Connection connection;
     private CustomerDaoImpl customerDaoImpl;
     private AccountDaoImpl accountDaoImpl;
     private AccountStatusDaoImpl accountStatusDaoImpl;
 
     public MenageCustomersController(Connection connection) {
-        this.connection = connection;
         this.customerDaoImpl = new CustomerDaoImpl(connection);
         this.accountDaoImpl = new AccountDaoImpl(connection);
         this.accountStatusDaoImpl = new AccountStatusDaoImpl(connection);
@@ -69,9 +67,9 @@ public class MenageCustomersController {
 
     }
 
-    public void blockAnAcount(Integer AccountID) {
+    public void blockAnAccount(Integer AccountID) {
         Account account = accountDaoImpl.find(AccountID);
-        if (account.getAccountStatus().equals(accountStatusDaoImpl.find(1))) {
+        if (account.getAccountStatus().getId().equals(accountStatusDaoImpl.find(1).getId())) {
             account.setAccountStatus(accountStatusDaoImpl.find(3));
             accountDaoImpl.update(account);
         } else {
@@ -79,9 +77,9 @@ public class MenageCustomersController {
         }
     }
 
-    public void unblockAnAcount(Integer AccountID) {
+    public void unblockAnAccount(Integer AccountID) {
         Account account = accountDaoImpl.find(AccountID);
-        if (account.getAccountStatus().equals(accountStatusDaoImpl.find(3))) {
+        if (account.getAccountStatus().getId().equals(accountStatusDaoImpl.find(3).getId())) {
             account.setAccountStatus(accountStatusDaoImpl.find(1));
             accountDaoImpl.update(account);
         } else {
