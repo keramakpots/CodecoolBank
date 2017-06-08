@@ -9,6 +9,7 @@ import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import model.Account;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,4 +47,25 @@ class AccountControllerTest {
         });
     }
 
+    @Test
+    void testIsDepositAddMoneyToAnAccount() {
+        Account testAccount = accountDao.find(1);
+        accountController.deposit(BigInteger.valueOf(100), testAccount);
+        assertEquals(BigInteger.valueOf(2100), accountDao.find(1).getBalance());
+    }
+
+    @Test
+    void testOfWithdrawSubtractMoneyFromAnAccount() {
+        Account testAccount = accountDao.find(1);
+        accountController.withdraw(BigInteger.valueOf(100), testAccount);
+        assertEquals(BigInteger.valueOf(1900), accountDao.find(1).getBalance());
+    }
+
+    @Test
+    void testIfWithdrawSubtractMoneyFromAnAccountThrowException() {
+        Account testAccount = accountDao.find(1);
+        assertThrows(NotEnoughMoneyException.class, () -> {
+            accountController.withdraw(BigInteger.valueOf(100000), testAccount);
+        });
+    }
 }
