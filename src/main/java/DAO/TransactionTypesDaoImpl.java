@@ -1,9 +1,10 @@
 package DAO;
 
+import model.TransactionType;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import model.TransactionType;
 
 public class TransactionTypesDaoImpl {
     private Connection connection;
@@ -30,5 +31,4 @@ public class TransactionTypesDaoImpl {
         }
         return transactionType;
     }
-
 }

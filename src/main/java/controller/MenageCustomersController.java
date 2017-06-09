@@ -5,6 +5,11 @@ import DAO.AccountStatusDaoImpl;
 import DAO.CustomerDaoImpl;
 import exceptions.AlreadyActiveException;
 import exceptions.AlreadyDisactivatedException;
+import model.Account;
+import model.AccountStatus;
+import model.AccountType;
+import model.Customer;
+
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -12,10 +17,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
-import model.Account;
-import model.AccountStatus;
-import model.AccountType;
-import model.Customer;
 
 
 public class MenageCustomersController {
@@ -87,16 +88,4 @@ public class MenageCustomersController {
             throw new AlreadyActiveException();
         }
     }
-
-//    public void AddANewCard() {
-//
-//    }
-//
-//    public void BlockACard() {
-//    }
-//
-//    public void UnblockACard() {
-//    }
-//
-
 }

@@ -48,7 +48,6 @@ public class Transaction {
         return value;
     }
 
-
     public TransactionType getTransactionType() {
         return transactionType;
     }

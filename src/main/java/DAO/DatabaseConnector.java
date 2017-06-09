@@ -7,6 +7,16 @@ import java.sql.SQLException;
 
 public class DatabaseConnector {
 
+    public static void disconnect(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("Database closing failed");
+            }
+        }
+    }
+
     public Connection connect(String path) {
         Connection connection = null;
         try {
@@ -18,15 +28,4 @@ public class DatabaseConnector {
         }
         return connection;
     }
-
-    public static void disconnect(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                System.out.println("Database closing failed");
-            }
-        }
-    }
-
 }

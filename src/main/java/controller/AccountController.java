@@ -5,14 +5,11 @@ import DAO.TransactionDaoImpl;
 import DAO.TransactionStatusesDaoImpl;
 import DAO.TransactionTypesDaoImpl;
 import exceptions.NotEnoughMoneyException;
+import model.*;
+
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Date;
-import model.Account;
-import model.AccountControllerInterface;
-import model.Transaction;
-import model.TransactionStatus;
-import model.TransactionType;
 
 public class AccountController implements AccountControllerInterface {
 
@@ -67,7 +64,5 @@ public class AccountController implements AccountControllerInterface {
         } else {
             throw new NotEnoughMoneyException();
         }
-
-
     }
 }
